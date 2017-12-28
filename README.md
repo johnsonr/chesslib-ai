@@ -1,7 +1,7 @@
 # @chesslib/ai
 The AI is a simple implementation of a basic board evaluation. The AI is trying every moves possible confirming the board value is better for a given move. The search depth can be configured, and due to it's high CPU intensivity it is recommended to use it with webworkers in browsers, and run it as a seperate process or thread in nodejs if required.
 
-AI REPO: https://github.com/azarus/chesslib-ai The example use of the AI is available in the repo under examples/ folder.
+
 
 
 ## Install:
@@ -29,6 +29,7 @@ ai.doMoveFEN({
 });
 ```
 For more please see examples folder
+
 ## WebWorkers
 Simply include `worker.js` in your application.
 
@@ -48,6 +49,8 @@ AIWorker.on("moves", moves => {
     // }
 });
 ```
+
+The example use of the AI is available in the repo under examples/ folder.
 
 ### License:
 
