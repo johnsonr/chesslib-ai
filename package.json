@@ -1,8 +1,9 @@
 {
 	"name": "@chesslib/ai",
-	"version": "1.1.0",
-	"description": "Simple Chess AI for @chesslib/core ",
-	"main": "index.js",
+	"version": "1.1.1",
+	"description": "Simple Chess AI for @chesslib/core",
+	"url": "https://github.com/azarus/chesslib-ai",
+	"main": "./build/ChessAI/index.js",
 	"types": "types.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
