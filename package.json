@@ -1,6 +1,6 @@
 {
 	"name": "@chesslib/ai",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "Simple Chess AI for @chesslib/core",
 	"url": "https://github.com/azarus/chesslib-ai",
 	"main": "./build/ChessAI/index.js",
