@@ -14,7 +14,7 @@ https://www.npmjs.com/package/@chesslib/core
 
 ## API (Basic)
 
-```
+```typescript
 import { ChessAI } from "@chesslib/ai";
 import { Chessboard, COLORS, Positions } from "@chesslib/core";
 var chessboard = Chessboard.fromPosition(Positions.default);
@@ -33,7 +33,7 @@ For more please see examples folder
 ## WebWorkers
 Simply include `worker.js` in your application.
 
-```
+```typescript
 import { Chessboard, COLORS, Positions } from "@chesslib/ai";
 import { ChessAIWorker } from "@chesslib/ai";
 var chessboard = Chessboard.fromPosition(Positions.default);
