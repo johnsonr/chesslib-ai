@@ -78,5 +78,4 @@ exports.BoardEvaluations = [
     exports.boardEvalsBlack,
     exports.boardEvalsWhite,
 ];
-
 //# sourceMappingURL=BoardEvals.js.map

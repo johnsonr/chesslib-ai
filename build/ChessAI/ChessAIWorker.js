@@ -41,5 +41,4 @@ var ChessAIWorker = /** @class */ (function () {
 }());
 exports.ChessAIWorker = ChessAIWorker;
 ;
-
 //# sourceMappingURL=ChessAIWorker.js.map

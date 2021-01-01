@@ -147,5 +147,4 @@ var ChessAI = /** @class */ (function () {
 }());
 exports.ChessAI = ChessAI;
 ;
-
 //# sourceMappingURL=ChessAI.js.map
