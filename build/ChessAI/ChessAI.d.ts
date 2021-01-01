@@ -1,12 +1,16 @@
 import { Chessboard } from "@chesslib/core";
+export interface Evaluator {
+    evaluateBoard(board: Chessboard, color: any): number;
+}
 export declare class ChessAI {
+    private evaluator;
     chessboard: Chessboard;
     terminalPositions: number;
     moves: any[];
     playingSide: number;
     playerCount: number;
     searchTime: number;
-    constructor(chessboard: any, playingSide: any, playerCount: any);
+    constructor(chessboard: any, playingSide: any, evaluator: Evaluator, playerCount?: number);
     setBoard(chessboard: any): void;
     loadBoard(positions: any): void;
     doMove(move: any): boolean;
@@ -18,4 +22,7 @@ export declare class ChessAI {
     evaluateBestMove(playerSide: any, depth: any, alpha: any, beta: any, isMaximisingPlayer: any): number;
     getRandomMove(): any;
     evaluateBoard(side: any): number;
+}
+export declare class SimpleEvaluator implements Evaluator {
+    evaluateBoard(board: any, side: any): number;
 }

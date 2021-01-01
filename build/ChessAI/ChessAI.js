@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChessAI = void 0;
+exports.SimpleEvaluator = exports.ChessAI = void 0;
 var core_1 = require("@chesslib/core");
 var BoardEvals_1 = require("./BoardEvals");
 var PIECE_VALUES = {
@@ -12,7 +12,9 @@ var PIECE_VALUES = {
     K: 900,
 };
 var ChessAI = /** @class */ (function () {
-    function ChessAI(chessboard, playingSide, playerCount) {
+    function ChessAI(chessboard, playingSide, evaluator, playerCount) {
+        if (playerCount === void 0) { playerCount = 2; }
+        this.evaluator = evaluator;
         this.chessboard = null;
         this.terminalPositions = 0;
         this.moves = [];
@@ -134,8 +136,18 @@ var ChessAI = /** @class */ (function () {
         return randMove;
     };
     ChessAI.prototype.evaluateBoard = function (side) {
+        ++this.terminalPositions;
+        return this.evaluator.evaluateBoard(this.chessboard, side);
+    };
+    return ChessAI;
+}());
+exports.ChessAI = ChessAI;
+var SimpleEvaluator = /** @class */ (function () {
+    function SimpleEvaluator() {
+    }
+    SimpleEvaluator.prototype.evaluateBoard = function (board, side) {
         var boardValue = 0;
-        this.chessboard.forEachPiece(function (piece) {
+        board.forEachPiece(function (piece) {
             if (side == piece.color) {
                 boardValue += PIECE_VALUES[piece.type] + BoardEvals_1.BoardEvaluations[piece.color][piece.type][piece.square.y][piece.square.x];
             }
@@ -144,11 +156,9 @@ var ChessAI = /** @class */ (function () {
             }
         });
         //console.log(`Returning ${boardValue}`);
-        ++this.terminalPositions;
         return boardValue;
     };
-    return ChessAI;
+    return SimpleEvaluator;
 }());
-exports.ChessAI = ChessAI;
-;
+exports.SimpleEvaluator = SimpleEvaluator;
 //# sourceMappingURL=ChessAI.js.map

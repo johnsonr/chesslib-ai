@@ -1,6 +1,6 @@
 
 import { COLORS, Chessboard, Positions } from "@chesslib/core";
-import { ChessAI } from "../ChessAI";
+import { ChessAI, Evaluator, SimpleEvaluator } from "../ChessAI";
 
 
 const board = new Chessboard();
@@ -8,16 +8,21 @@ board.loadPositions(Positions.default);
 
 let moveCount = 0;
 
+const whiteEvaluator: Evaluator = new SimpleEvaluator();
+const blackEvaluator: Evaluator = new SimpleEvaluator();
+const depth = 5;
+
+
 while (board) {
     ++moveCount;
 
-    move(board, COLORS.WHITE, moveCount, 5);
-    move(board, COLORS.BLACK, moveCount, 5);
+    move(board, COLORS.WHITE, moveCount, whiteEvaluator, depth);
+    move(board, COLORS.BLACK, moveCount, blackEvaluator, depth);
 
 }
 
-function move(board, color, moveCount, depth) {
-    const ai = new ChessAI(board, color, 2);
+function move(board, color, moveCount, evaluator: Evaluator, depth) {
+    const ai = new ChessAI(board, color, evaluator);
     const startTime = new Date().getTime();
     const bestMoves = ai.getBestMoves(depth, 15);
     const endTime = new Date().getTime();

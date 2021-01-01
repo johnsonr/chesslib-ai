@@ -1,6 +1,11 @@
 import { Chessboard, Positions, COLORS } from "@chesslib/core";
 import { BoardEvaluations } from "./BoardEvals";
 
+export interface Evaluator {
+
+	evaluateBoard(board: Chessboard, color): number;
+}
+
 const PIECE_VALUES = {
 	P: 10,
 	B: 30,
@@ -20,7 +25,7 @@ export class ChessAI {
 	playerCount = 2;
 	searchTime = 0;
 
-	constructor(chessboard, playingSide, playerCount) {
+	constructor(chessboard, playingSide, private evaluator: Evaluator, playerCount = 2) {
 		this.chessboard = chessboard;
 		this.playingSide = playingSide;
 		this.playerCount = playerCount;
@@ -152,8 +157,17 @@ export class ChessAI {
 	}
 
 	evaluateBoard(side) {
+		++this.terminalPositions;
+		return this.evaluator.evaluateBoard(this.chessboard, side);
+	}
+
+}
+
+export class SimpleEvaluator implements Evaluator {
+
+	evaluateBoard(board, side) {
 		var boardValue = 0;
-		this.chessboard.forEachPiece(piece => {
+		board.forEachPiece(piece => {
 			if (side == piece.color) {
 				boardValue += PIECE_VALUES[piece.type] + BoardEvaluations[piece.color][piece.type][piece.square.y][piece.square.x];
 			} else {
@@ -163,8 +177,6 @@ export class ChessAI {
 		});
 		//console.log(`Returning ${boardValue}`);
 
-		++this.terminalPositions;
 		return boardValue;
 	}
-
-};
+}
