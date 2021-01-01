@@ -14,6 +14,7 @@ var PIECE_VALUES = {
 var ChessAI = /** @class */ (function () {
     function ChessAI(chessboard, playingSide, playerCount) {
         this.chessboard = null;
+        this.terminalPositions = 0;
         this.moves = [];
         this.playingSide = 0;
         this.playerCount = 2;
@@ -142,6 +143,8 @@ var ChessAI = /** @class */ (function () {
                 boardValue -= PIECE_VALUES[piece.type] + BoardEvals_1.BoardEvaluations[piece.color][piece.type][piece.square.y][piece.square.x];
             }
         });
+        //console.log(`Returning ${boardValue}`);
+        ++this.terminalPositions;
         return boardValue;
     };
     return ChessAI;

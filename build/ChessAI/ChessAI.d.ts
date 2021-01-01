@@ -1,6 +1,7 @@
 import { Chessboard } from "@chesslib/core";
 export declare class ChessAI {
     chessboard: Chessboard;
+    terminalPositions: number;
     moves: any[];
     playingSide: number;
     playerCount: number;
