@@ -1,10 +1,10 @@
 
 import { COLORS, Chessboard, Positions } from "@chesslib/core";
-import { ChessAI } from "../ChessAI";
+import { ChessAI, Evaluator } from "../ChessAI";
 import { RuleBasedEvaluator } from "../ChessAI/RuleBasedEvaluator";
+import { computeAndMakeMove } from "./move";
 
 import { question } from "readline-sync";
-
 
 const board = new Chessboard();
 board.loadPositions(Positions.default);
@@ -12,6 +12,9 @@ board.loadPositions(Positions.default);
 let moveCount = 0;
 
 const aiColor = COLORS.BLACK;
+
+const depth = 5;
+const evaluator: Evaluator = new RuleBasedEvaluator();
 
 while (true) {
     ++moveCount;
@@ -30,23 +33,8 @@ while (true) {
     //var moves = board.getMoves();
     //console.log("Moves:", moves);
 
-    const ai = new ChessAI(board, aiColor, new RuleBasedEvaluator());
-    const startTime = new Date().getTime();
-    const bestMoves = ai.getBestMoves(5, 15);
-    const endTime = new Date().getTime();
-    const elapsedTime = endTime - startTime;
-    //console.log("Best Moves for black:", bestMoves);
-    const bestMove = bestMoves[0];
-
-    // Make it always the score for white
-    const score = (aiColor === COLORS.BLACK) ? -bestMove.score : bestMove.score;
-
-    console.log(`${moveCount}: ${bestMove.from}-${bestMove.to} (${score}): ${ai.terminalPositions} terminal positions in ${elapsedTime}ms`);
-    board.doMoveFEN(bestMove);
-
+    computeAndMakeMove(board, aiColor, moveCount, evaluator, depth);
 
     //console.log("chessboard", board.getBoard());
 
-
 }
-
