@@ -1,19 +1,9 @@
 import { Chessboard, Positions, COLORS } from "@chesslib/core";
-import { BoardEvaluations } from "./BoardEvals";
 
 export interface Evaluator {
 
 	evaluateBoard(board: Chessboard, color): number;
 }
-
-const PIECE_VALUES = {
-	P: 10,
-	B: 30,
-	N: 30,
-	R: 50,
-	Q: 80,
-	K: 900,
-};
 
 export class ChessAI {
 	chessboard: Chessboard = null;
@@ -161,22 +151,4 @@ export class ChessAI {
 		return this.evaluator.evaluateBoard(this.chessboard, side);
 	}
 
-}
-
-export class SimpleEvaluator implements Evaluator {
-
-	evaluateBoard(board, side) {
-		var boardValue = 0;
-		board.forEachPiece(piece => {
-			if (side == piece.color) {
-				boardValue += PIECE_VALUES[piece.type] + BoardEvaluations[piece.color][piece.type][piece.square.y][piece.square.x];
-			} else {
-				boardValue -= PIECE_VALUES[piece.type] + BoardEvaluations[piece.color][piece.type][piece.square.y][piece.square.x];
-			}
-
-		});
-		//console.log(`Returning ${boardValue}`);
-
-		return boardValue;
-	}
 }

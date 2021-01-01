@@ -23,6 +23,3 @@ export declare class ChessAI {
     getRandomMove(): any;
     evaluateBoard(side: any): number;
 }
-export declare class SimpleEvaluator implements Evaluator {
-    evaluateBoard(board: any, side: any): number;
-}

@@ -1,6 +1,7 @@
 
 import { COLORS, Chessboard, Positions } from "@chesslib/core";
-import { ChessAI, SimpleEvaluator } from "../ChessAI";
+import { ChessAI } from "../ChessAI";
+import { SimpleEvaluator } from "../ChessAI/SimpleEvaluator";
 
 import { question } from "readline-sync";
 

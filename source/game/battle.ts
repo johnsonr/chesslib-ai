@@ -1,6 +1,7 @@
 
 import { COLORS, Chessboard, Positions } from "@chesslib/core";
-import { ChessAI, Evaluator, SimpleEvaluator } from "../ChessAI";
+import { ChessAI, Evaluator } from "../ChessAI";
+import { SimpleEvaluator } from "../ChessAI/SimpleEvaluator";
 
 
 const board = new Chessboard();
