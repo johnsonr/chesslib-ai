@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ChessAIWorker = void 0;
 var ChessAIWorker = /** @class */ (function () {
     function ChessAIWorker(workerPath) {
         var _this = this;

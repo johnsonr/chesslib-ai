@@ -12,8 +12,10 @@
     "noResolve": false,
     "module": "commonjs",
     "moduleResolution": "node",
-    "types": [],
+    "types": [
+      "node"
+    ],
     "target": "es5",
-    "declaration": true
+    "declaration": true,
   }
 }

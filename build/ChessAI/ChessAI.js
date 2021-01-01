@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ChessAI = void 0;
 var core_1 = require("@chesslib/core");
 var BoardEvals_1 = require("./BoardEvals");
 var PIECE_VALUES = {
