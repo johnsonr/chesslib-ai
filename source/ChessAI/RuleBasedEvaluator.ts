@@ -3,6 +3,8 @@ import { Evaluator } from "./ChessAI";
 import { BoardEvaluations } from "./BoardEvals";
 import { Chessboard, COLORS, Piece } from "@chesslib/core";
 
+import * as _ from "lodash";
+
 const PIECE_VALUES = {
     P: 10,
     B: 31,
@@ -24,6 +26,7 @@ export interface EvaluatorRule {
     delta(board: Chessboard, side): number;
 }
 
+// TODO rules should be able to apply to different phases of the game
 
 export class RuleBasedEvaluator implements Evaluator {
 
@@ -63,19 +66,13 @@ export class RuleBasedEvaluator implements Evaluator {
         });
         //console.log(`Returning ${boardValue}`);
 
-
-        // if (this.opts.doubledPawnPenalty) {
-        //     const pawns = board.findPieces("P", side);
-        //     if
-        //     console.log(pawns);
-        // }
-
         // Mobility?
         // if (this.opts.mobility && board.history.length > 5) {
         //     const legalMoves = board.getMoves(side);
         //     boardValue += legalMoves.length / 3;
         // }
 
+        // TODO promise?
         this.rules.forEach(rule => {
             const delta = rule.delta(board, side);
             //console.log(`Rule ${rule.name}: delta ${delta}`);
@@ -93,6 +90,26 @@ export function bishopPairBoost(boost: number): EvaluatorRule {
         delta: (board, side) => {
             const bishops = board.findPieces("B", side);
             return (bishops.length === 2) ? boost : 0;
+        }
+    }
+}
+
+export function pawnWeakness(opts: {
+    doubledPawnPenalty: number,
+    isolatedPawnPenalty: number,
+    backwardPawnPenalty: number,
+}): EvaluatorRule {
+    return {
+        name: "PawnWeakness",
+        delta: (board, side) => {
+            let delta = 0;
+            const pawns = board.findPieces("P", side);
+            // const isolated = pawns.filter(p => p.)
+            const files = pawns.map(p => p.square.x);
+            const uniques = _.uniq(files);
+            delta -= (files.length - uniques.length) * opts.doubledPawnPenalty;
+
+            return delta;
         }
     }
 }
