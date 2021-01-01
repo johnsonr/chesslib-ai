@@ -6,7 +6,8 @@
 	"main": "./build/ChessAI/index.js",
 	"types": "types.ts",
 	"scripts": {
-		"start": "tsc && node build/game/play.js",
+		"play": "tsc && node build/game/play.js",
+		"battle": "tsc && node build/game/battle.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Azarus",
