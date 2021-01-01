@@ -1,7 +1,7 @@
 
 import { COLORS, Chessboard, Positions } from "@chesslib/core";
 import { ChessAI } from "../ChessAI";
-import { SimpleEvaluator } from "../ChessAI/SimpleEvaluator";
+import { RuleBasedEvaluator } from "../ChessAI/RuleBasedEvaluator";
 
 import { question } from "readline-sync";
 
@@ -30,7 +30,7 @@ while (true) {
     //var moves = board.getMoves();
     //console.log("Moves:", moves);
 
-    const ai = new ChessAI(board, aiColor, new SimpleEvaluator());
+    const ai = new ChessAI(board, aiColor, new RuleBasedEvaluator());
     const startTime = new Date().getTime();
     const bestMoves = ai.getBestMoves(5, 15);
     const endTime = new Date().getTime();

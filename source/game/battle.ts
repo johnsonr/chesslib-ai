@@ -1,7 +1,7 @@
 
 import { COLORS, Chessboard, Positions } from "@chesslib/core";
 import { ChessAI, Evaluator } from "../ChessAI";
-import { SimpleEvaluator } from "../ChessAI/SimpleEvaluator";
+import { bishopPairBoost, RuleBasedEvaluator } from "../ChessAI/RuleBasedEvaluator";
 
 
 const board = new Chessboard();
@@ -9,8 +9,10 @@ board.loadPositions(Positions.default);
 
 let moveCount = 0;
 
-const whiteEvaluator: Evaluator = new SimpleEvaluator();
-const blackEvaluator: Evaluator = new SimpleEvaluator();
+const whiteEvaluator: Evaluator = new RuleBasedEvaluator(
+    bishopPairBoost(3),
+);
+const blackEvaluator: Evaluator = new RuleBasedEvaluator();
 const depth = 5;
 
 
@@ -29,6 +31,8 @@ function move(board, color, moveCount, evaluator: Evaluator, depth) {
     const endTime = new Date().getTime();
     const elapsedTime = endTime - startTime;
     //console.log("Best Moves for black:", bestMoves);
+
+    // TODO randomize if no great difference
     const bestMove = bestMoves[0];
 
     // Make it always the score for white

@@ -1,4 +1,7 @@
 import { Chessboard } from "@chesslib/core";
+/**
+ * Pawn = 10
+ */
 export interface Evaluator {
     evaluateBoard(board: Chessboard, color: any): number;
 }
